@@ -183,8 +183,7 @@ public class MainWindow extends javax.swing.JFrame {
 	  
 	  public void InitBot(){
 		  PaintBot newpaintbot = new PaintBot(300,300,300,450,300,550,300,625);
-		  paintbot = newpaintbot;
-		  
+		  paintbot = newpaintbot;  
 	  }
 	  
 	  public void drawPaint(){
