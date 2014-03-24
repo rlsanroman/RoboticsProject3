@@ -537,8 +537,7 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">  
 
-    private void initComponents() {
-
+    private void initComponents() {    	
         controlPanel = new javax.swing.JPanel();
         paintButton = new javax.swing.JToggleButton();
         jointButtonsPanel = new javax.swing.JPanel();
@@ -597,7 +596,7 @@ public class MainWindow extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(800, 600));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(362, 100));
-        controlPanel.setSize(new java.awt.Dimension(200, 100));
+        controlPanel.setSize(new java.awt.Dimension(200, 100));		
 
         paintButton.setFont(paintButton.getFont().deriveFont(paintButton.getFont().getStyle() | java.awt.Font.BOLD, paintButton.getFont().getSize()+5));
         paintButton.setText("Paint");
