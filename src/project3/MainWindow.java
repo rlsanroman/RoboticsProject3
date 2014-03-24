@@ -489,6 +489,10 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
+    private javax.swing.JMenuItem ClientMenuItem;
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenu OptionsMenu;
+    private javax.swing.JMenuItem ServerMenuItem;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel coordinatesPanel;
     //private javax.swing.JLabel j1Label;
@@ -537,7 +541,18 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">  
 
+<<<<<<< HEAD
     private void initComponents() {    	
+=======
+    private void initComponents() {
+    	
+    	
+        MenuBar = new javax.swing.JMenuBar();
+        OptionsMenu = new javax.swing.JMenu();
+        ServerMenuItem = new javax.swing.JMenuItem();
+        ClientMenuItem = new javax.swing.JMenuItem();
+
+>>>>>>> 735b195156c38d11a672cc430ff3ba37ddbd7368
         controlPanel = new javax.swing.JPanel();
         paintButton = new javax.swing.JToggleButton();
         jointButtonsPanel = new javax.swing.JPanel();
@@ -939,6 +954,19 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        OptionsMenu.setText("Options");
+
+        ServerMenuItem.setText("Server");
+        OptionsMenu.add(ServerMenuItem);
+
+        ClientMenuItem.setText("Client");
+        OptionsMenu.add(ClientMenuItem);
+
+        MenuBar.add(OptionsMenu);
+
+        setJMenuBar(MenuBar);
+
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
