@@ -35,7 +35,7 @@ public class ServerWindow extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Server");
 
         jLabel1.setText("Port Number:");
