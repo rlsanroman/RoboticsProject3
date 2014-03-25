@@ -2,6 +2,7 @@ package project3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class SocketServer {
 		int BACKLOG=1;
 		int ClientNumber=1;
 		//Scanner input=new Scanner(System.in);
-		System.out.println("This is the server.");
+		System.out.println("Server IP address: " + InetAddress.getLocalHost().getHostAddress());
 		//System.out.println("Please enter the PORT number.");
 		//PORT=input.nextInt();
 		//input.nextLine();
