@@ -33,7 +33,7 @@ public class ServerWindow extends javax.swing.JFrame {
         portNumberTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+//        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Server");
@@ -43,16 +43,17 @@ public class ServerWindow extends javax.swing.JFrame {
         okButton.setText("Ok");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
+            	setVisible(false);
+                SocketServer.start(portNumberTextField.getText());
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+//        cancelButton.setText("Cancel");
+//        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                cancelButtonActionPerformed(evt);
+//            }
+//        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -67,7 +68,7 @@ public class ServerWindow extends javax.swing.JFrame {
                         .addComponent(portNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(cancelButton)
+                        //.addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(okButton)
                         .addGap(15, 15, 15))))
@@ -81,8 +82,8 @@ public class ServerWindow extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okButton)
-                    .addComponent(cancelButton))
+                    .addComponent(okButton))
+                    //.addComponent(cancelButton))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -150,7 +151,7 @@ public class ServerWindow extends javax.swing.JFrame {
     	return portNumberTextField.getText();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
+//    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;

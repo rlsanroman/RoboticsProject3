@@ -8,26 +8,26 @@ import java.util.Scanner;
 
 public class SocketServer {
 	
-	public static void start() {
+	public static void start(String port) {
 		try {
-			startServer();
+			startServer(Integer.parseInt(port));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static void startServer() throws Exception {
-		int PORT=0;
-		int BACKLOG=0;
+	public static void startServer(int PORT) throws Exception {
+		//int PORT=0;
+		int BACKLOG=1;
 		int ClientNumber=1;
-		Scanner input=new Scanner(System.in);
+		//Scanner input=new Scanner(System.in);
 		System.out.println("This is the server.");
-		System.out.println("Please enter the PORT number.");
-		PORT=input.nextInt();
-		input.nextLine();
-		System.out.println("Please enter the max number of clients that can connect to the server.");
-		BACKLOG=input.nextInt();
+		//System.out.println("Please enter the PORT number.");
+		//PORT=input.nextInt();
+		//input.nextLine();
+		//System.out.println("Please enter the max number of clients that can connect to the server.");
+		//BACKLOG=input.nextInt();
 		
 		ServerSocket listen = new ServerSocket(PORT, BACKLOG);
 		System.out.println("Server is now listening.");
@@ -37,7 +37,7 @@ public class SocketServer {
 				//ClientNumber++;
 			}
 		} finally {
-			input.close();
+			//input.close();
 			listen.close();
 		}
 	}

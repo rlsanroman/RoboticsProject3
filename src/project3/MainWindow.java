@@ -222,6 +222,14 @@ public class MainWindow extends javax.swing.JFrame {
 	       String total3 = String.valueOf(paintbot.brushangle);
 	       g.drawString(total3, 100, 140);
 	  }
+	  
+	  public void drawServer(){
+		  Graphics g = this.getGraphics();
+		  g.setColor(Color.white);
+	       String status = String.valueOf("Server");
+	       g.drawString(status, 400, 100);
+	  }
+	  
 	  @Override
 	  public void paint(Graphics g) {
 		 super.paintComponents(g);
