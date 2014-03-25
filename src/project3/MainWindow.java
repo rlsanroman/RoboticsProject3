@@ -546,6 +546,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton leftButton;
     private keyEvent keyListener;
     private mouseEvent mouseListener;
+    private ClientWindow clientWindow;
+    private ServerWindow serverWindow;
     // End of variables declaration     
     
     
@@ -568,7 +570,8 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			JOptionPane.showMessageDialog(null, "Client action");
+			clientWindow = new ClientWindow();
+			clientWindow.setVisible(true);
 		}
 	}
     
@@ -583,88 +586,11 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{			
-			initServerWindow();			
+			serverWindow = new ServerWindow();
+			serverWindow.setVisible(true);
 		}
 		
 	}
-	
-	private void initServerWindow() {
-		// Variables declaration - do not modify//GEN-BEGIN:variables
-	    javax.swing.JButton cancelButton;
-	    javax.swing.JLabel jLabel1;
-	    javax.swing.JPanel mainPanel;
-	    javax.swing.JButton okButton;
-	    javax.swing.JTextField portNumberTextField;
-	    // End of variables declaration//GEN-END:variables
-
-        mainPanel = new javax.swing.JPanel();
-        portNumberTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Server");
-
-        jLabel1.setText("Port Number:");
-
-        okButton.setText("Ok");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SocketServer.start();
-            }
-        });
-
-        cancelButton.setText("Cancel");
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(portNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(cancelButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(okButton)
-                        .addGap(15, 15, 15))))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(portNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
     private void initComponents() {
     	
     	// create our actions
