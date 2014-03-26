@@ -42,6 +42,7 @@ public class ClientWindow extends javax.swing.JFrame {
         portNumberTextField = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
         //cancelButton = new javax.swing.JButton();
+        delayCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,7 +76,14 @@ public class ClientWindow extends javax.swing.JFrame {
 //                cancelButtonActionPerformed(evt);
 //            }
 //        });
-
+        delayCheckBox.setText("2s Delay");
+        delayCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delayCheckBoxActionPerformed(evt);
+            }
+        });
+        
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,6 +100,8 @@ public class ClientWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(218, Short.MAX_VALUE)
+                .addComponent(delayCheckBox)
+                .addGap(34,34,34)
                 //.addComponent(cancelButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(okButton)
@@ -110,7 +120,8 @@ public class ClientWindow extends javax.swing.JFrame {
                     .addComponent(portNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okButton))
+                    .addComponent(okButton)
+                    .addComponent(delayCheckBox))
                     //.addComponent(cancelButton))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -146,6 +157,10 @@ public class ClientWindow extends javax.swing.JFrame {
     private void ipAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipAddressTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ipAddressTextFieldActionPerformed
+
+    private void delayCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delayCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,5 +214,6 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
     private javax.swing.JTextField portNumberTextField;
+    private javax.swing.JCheckBox delayCheckBox;
     // End of variables declaration//GEN-END:variables
 }
