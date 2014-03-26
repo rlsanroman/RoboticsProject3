@@ -63,9 +63,9 @@ public class SocketServer {
 			try{
 				String ClientInput="";
 				out=new PrintWriter(socket.getOutputStream(), true);
-				out.println("Connection between the server and the client" +
+				out.println("Connection between the server and the client " +
 						"is successfully established!"+
-						"You are client "+ClientNumber+"!");
+						" Welcome!");
 				new ServerSendThread(socket).start();
 				Scanner socketInput = new Scanner(socket.getInputStream());
 				while(true) {
