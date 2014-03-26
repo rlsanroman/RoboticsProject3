@@ -1,5 +1,6 @@
 package project3;
 
+import java.awt.Graphics;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -7,9 +8,12 @@ import java.util.Scanner;
 
 public class SocketClient {
 	private static PrintWriter out;
+	public static MainWindow mw;
 	
-	public static void start(String port, String ip_address) {
+	public static void start(String port, String ip_address, Graphics g) {
 		try {
+			mw = new MainWindow();
+			mw.drawClient(g);
 			startClient(Integer.parseInt(port), ip_address);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -6,18 +6,25 @@
 
 package project3;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author rosbelsanroman
  */
 @SuppressWarnings("serial")
 public class ServerWindow extends javax.swing.JFrame {
-
+	private static Graphics mw; //Main window object
     /**
      * Creates new form ServerWindow
      */
-    public ServerWindow() {
-        initComponents();
+	public ServerWindow() {
+        initComponents();        
+    }
+	
+    public ServerWindow(Graphics g) {
+    	mw = g;
+        initComponents();        
     }
 
     /**
@@ -44,7 +51,7 @@ public class ServerWindow extends javax.swing.JFrame {
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	setVisible(false);
-                SocketServer.start(portNumberTextField.getText());
+                SocketServer.start(portNumberTextField.getText(), mw);
             }
         });
 

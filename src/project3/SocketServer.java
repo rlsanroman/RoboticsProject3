@@ -1,5 +1,6 @@
 package project3;
 
+import java.awt.Graphics;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -8,10 +9,13 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class SocketServer {
+	public static MainWindow mw;
 	
-	public static void start(String port) {
+	public static void start(String port, Graphics g) {
 		try {
-			startServer(Integer.parseInt(port));
+			mw = new MainWindow();
+			mw.drawServer(g);
+			startServer(Integer.parseInt(port));			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,6 +33,8 @@ public class SocketServer {
 		//input.nextLine();
 		//System.out.println("Please enter the max number of clients that can connect to the server.");
 		//BACKLOG=input.nextInt();
+		
+		
 		
 		ServerSocket listen = new ServerSocket(PORT, BACKLOG);
 		System.out.println("Server is now listening.");

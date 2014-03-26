@@ -7,9 +7,9 @@
 package project3;
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -25,13 +25,9 @@ import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -46,6 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
 	Timer timer = new Timer();
 	boolean paused = false;
 	boolean following = false;
+	Graphics mainwindow;
 	
 	String jointClicked = "";
 	Vector<Location> paintinglocations = new Vector<Location>();
@@ -223,19 +220,28 @@ public class MainWindow extends javax.swing.JFrame {
 	       g.drawString(total3, 100, 140);
 	  }
 	  
-	  public void drawServer(){
-		  Graphics g = this.getGraphics();
-		  g.setColor(Color.white);
+	  public void drawServer(Graphics g){
+		  g.setColor(Color.GREEN);
+		  g.setFont(new Font("Arial", Font.BOLD, 20)); 
 	       String status = String.valueOf("Server");
-	       g.drawString(status, 400, 100);
+	       g.drawString(status, 500, 100);
+	  }
+	  
+	  public void drawClient(Graphics g){
+		  g.setColor(Color.GREEN);
+		  g.setFont(new Font("Arial", Font.BOLD, 20)); 
+	       String status = String.valueOf("Client");
+	       g.drawString(status, 500, 100);
 	  }
 	  
 	  @Override
 	  public void paint(Graphics g) {
 		 super.paintComponents(g);
+		 mainwindow = this.getGraphics();
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);
 	     drawSlider();
 	     drawPaint();
+	     //drawClient(mainwindow);
 	     //drawAngles();
 	     joint1YLabel.setText(String.valueOf(paintbot.joint1.y));
 	     joint1XLabel.setText(String.valueOf(paintbot.joint1.x));
@@ -578,7 +584,7 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			clientWindow = new ClientWindow();
+			clientWindow = new ClientWindow(mainwindow);
 			clientWindow.setVisible(true);
 		}
 	}
@@ -594,7 +600,7 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{			
-			serverWindow = new ServerWindow();
+			serverWindow = new ServerWindow(mainwindow);
 			serverWindow.setVisible(true);
 		}
 		
