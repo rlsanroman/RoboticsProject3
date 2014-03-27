@@ -6,15 +6,22 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SocketClient {
+import javax.swing.SwingWorker;
+
+public class SocketClient extends SwingWorker<Integer, Integer> {
 	private static PrintWriter out;
 	public static MainWindow mw;
 	
-	public static void start(String port, String ip_address, Graphics g) {
+	protected Integer doInBackground() throws Exception
+    {
+        // Do a time-consuming task.
+        Thread.sleep(1000);
+        return 42;
+    }
+	
+	public static void start(int port, String ip_address) {
 		try {
-			mw = new MainWindow();
-			mw.drawClient(g);
-			startClient(Integer.parseInt(port), ip_address);
+			startClient(port, ip_address);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

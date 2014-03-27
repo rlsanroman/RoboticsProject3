@@ -43,6 +43,21 @@ public class MainWindow extends javax.swing.JFrame {
 	boolean paused = false;
 	boolean following = false;
 	Graphics mainwindow;
+	int port;
+	String ip_address, status;
+	MainWindow mw;
+	
+	public void set_ip(String ip) {
+		ip_address = ip;
+	}
+	
+	public void set_port(int p) {
+		port = p;
+	}
+	
+	public void set_status(String s) {
+		status = s;
+	}
 	
 	String jointClicked = "";
 	Vector<Location> paintinglocations = new Vector<Location>();
@@ -237,7 +252,7 @@ public class MainWindow extends javax.swing.JFrame {
 	  @Override
 	  public void paint(Graphics g) {
 		 super.paintComponents(g);
-		 mainwindow = this.getGraphics();
+		 mw = this;
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);
 	     drawSlider();
 	     drawPaint();
@@ -525,8 +540,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu OptionsMenu;
     private javax.swing.JMenuItem ServerMenuItem;
+    private javax.swing.JMenuItem ConnectMenuItem;
     //Menubar actions
-    private Action serverAction, clientAction;
+    private Action serverAction, clientAction, connectAction;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel coordinatesPanel;
     //private javax.swing.JLabel j1Label;
@@ -589,8 +605,9 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			clientWindow = new ClientWindow(mainwindow);
+			clientWindow = new ClientWindow(mw);
 			clientWindow.setVisible(true);
+			System.out.println("done");
 		}
 	}
     
@@ -605,21 +622,47 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{			
-			serverWindow = new ServerWindow(mainwindow);
+			serverWindow = new ServerWindow(mw);
 			serverWindow.setVisible(true);
 		}
 		
 	}
+	
+    /**
+	 * Connect action.
+	 */
+	public class connectAction extends AbstractAction
+	{
+		public connectAction()
+		{
+			super();
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+			//System.out.println(port + " " + status);
+			if(status=="Server") {
+				System.out.println("Enter");
+				new SocketServer().start(port);
+				System.out.println("Done");
+			} else if(status=="Client") {
+				new SocketClient().start(port, ip_address);
+			}				
+		}
+		
+	}
+	
     private void initComponents() {
     	
     	// create our actions
         clientAction = new clientAction();
         serverAction = new serverAction();
+        connectAction = new connectAction();
         
         MenuBar = new javax.swing.JMenuBar();
         OptionsMenu = new javax.swing.JMenu();
         ServerMenuItem = new javax.swing.JMenuItem(serverAction);
         ClientMenuItem = new javax.swing.JMenuItem(clientAction);
+        ConnectMenuItem = new javax.swing.JMenuItem(connectAction);
 
         controlPanel = new javax.swing.JPanel();
         paintButton = new javax.swing.JToggleButton();
@@ -1045,9 +1088,12 @@ public class MainWindow extends javax.swing.JFrame {
         OptionsMenu.add(ClientMenuItem);
 
         ServerMenuItem.setText("Server");
-        OptionsMenu.add(ServerMenuItem);        
-
+        OptionsMenu.add(ServerMenuItem);
+        
+        ConnectMenuItem.setText("Connect");
+        
         MenuBar.add(OptionsMenu);
+        MenuBar.add(ConnectMenuItem);
 
         setJMenuBar(MenuBar);
 

@@ -8,14 +8,21 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class SocketServer {
+import javax.swing.SwingWorker;
+
+public class SocketServer extends SwingWorker<Integer, Integer> {
 	public static MainWindow mw;
 	
-	public static void start(String port, Graphics g) {
+	protected Integer doInBackground() throws Exception
+    {
+        // Do a time-consuming task.
+        Thread.sleep(1000);
+        return 42;
+    }
+	
+	public static void start(int port) {
 		try {
-			mw = new MainWindow();
-			mw.drawServer(g);
-			startServer(Integer.parseInt(port));			
+			startServer(port);			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

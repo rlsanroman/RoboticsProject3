@@ -13,16 +13,17 @@ import java.awt.Graphics;
  * @author rosbelsanroman
  */
 public class ClientWindow extends javax.swing.JFrame {
-	private static Graphics mw; //Main window object
-    /**
+	private static MainWindow mw; //Main window object
+
+	/**
      * Creates new form ClientWindow
      */
     public ClientWindow() {
         initComponents();
     }
     
-    public ClientWindow(Graphics g) {
-    	mw = g;
+    public ClientWindow(MainWindow m) {
+    	mw = m;
         initComponents();
     }
 
@@ -64,8 +65,11 @@ public class ClientWindow extends javax.swing.JFrame {
         okButton.setText("Ok");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	mw.set_ip(ipAddressTextField.getText());
+            	mw.set_port(Integer.parseInt(portNumberTextField.getText()));
+            	mw.set_status("Client");
             	setVisible(false);
-                SocketClient.start(portNumberTextField.getText(), ipAddressTextField.getText(), mw);
+                //SocketClient.start(, , mw);
             }
         });
 

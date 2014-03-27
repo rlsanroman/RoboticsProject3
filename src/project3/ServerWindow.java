@@ -14,7 +14,7 @@ import java.awt.Graphics;
  */
 @SuppressWarnings("serial")
 public class ServerWindow extends javax.swing.JFrame {
-	private static Graphics mw; //Main window object
+	private static MainWindow mw; //Main window object
     /**
      * Creates new form ServerWindow
      */
@@ -22,8 +22,8 @@ public class ServerWindow extends javax.swing.JFrame {
         initComponents();        
     }
 	
-    public ServerWindow(Graphics g) {
-    	mw = g;
+    public ServerWindow(MainWindow m) {
+    	mw = m;
         initComponents();        
     }
 
@@ -50,8 +50,10 @@ public class ServerWindow extends javax.swing.JFrame {
         okButton.setText("Ok");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	mw.set_port(Integer.parseInt(portNumberTextField.getText()));
+            	mw.set_status("Server");
             	setVisible(false);
-                SocketServer.start(portNumberTextField.getText(), mw);
+                //SocketServer.start(portNumberTextField.getText(), mw);
             }
         });
 
