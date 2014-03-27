@@ -48,6 +48,7 @@ public class MainWindow extends javax.swing.JFrame {
 	int port;
 	String ip_address, status;
 	MainWindow mw;
+	public boolean clientPaintButton = false;
 	
 	public void set_ip(String ip) {
 		ip_address = ip;
@@ -63,17 +64,16 @@ public class MainWindow extends javax.swing.JFrame {
 	
 	public void drawBotbyString(String points)
 	{
-		String[] lines = points.split("\n");
+		String[] lines = points.split("-");
 		String[] line0 = lines[0].split(",");
 		String[] line1 = lines[1].split(",");
 		String[] line2 = lines[2].split(",");
 		String[] line3 = lines[3].split(",");
-		Location joint1 = new Location(line0);
-		Location joint2 = new Location(line1);
-		Location joint3 = new Location(line2);
-		Location brush = new Location(line3);
-		
-	    drawBot(joint1.x,joint2.x,joint2.y,joint3.x,joint3.y,brush.x,brush.y);
+		paintbot.joint1 = new Location(line0);
+		paintbot.joint2 = new Location(line1);
+		paintbot.joint3 = new Location(line2);
+		paintbot.brush = new Location(line3);
+		//System.out.println(brush.x);
 	}
 	
 	String jointClicked = "";
@@ -168,7 +168,8 @@ public class MainWindow extends javax.swing.JFrame {
 		   		 paintbot.joint3.x -= tempjointpos - paintbot.joint1.x;
 		   		 paintbot.brush.x -= tempjointpos - paintbot.joint1.x;
 		  }
-		
+		  //if(status != null)
+			//  SocketClient.setMessage(paintbot.toString());
 		 // System.out.println("X: " + actualx + "Y: " + actualy);
 
 	  }
@@ -221,6 +222,8 @@ public class MainWindow extends javax.swing.JFrame {
 			  	paintbot.brush.y = (int)Math.round(newY);
 			  	break;
 		  }
+		  //if(status != null)
+			  //SocketClient.setMessage(paintbot.toString());
 	  }	  
 	  
 	  
@@ -270,10 +273,14 @@ public class MainWindow extends javax.swing.JFrame {
 	  
 	  @Override
 	  public void paint(Graphics g) {
-		 if(status != null)
-			SocketClient.setMessage("this is a test TWOOOOO!!!");
 		 super.paintComponents(g);
 		 mw = this;
+		 if(status.equals("Client"))
+		 {
+			 new SocketClient().execute();				
+			 SocketClient.setMessage(paintbot.toString());
+		 }
+
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);
 	     drawSlider();
 	     drawPaint();
@@ -397,6 +404,8 @@ public class MainWindow extends javax.swing.JFrame {
 	    		paintButton.requestFocusInWindow();
 	    		paintButton.doClick();
 	    		paintCanvasPanel.requestFocusInWindow();
+	    		new SocketClient().execute();
+	    		SocketClient.setMessage("Paint");
 	    	}
 	    	else if (code == KeyEvent.VK_ESCAPE)
 	    	{
@@ -478,6 +487,8 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void paintButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
     	painting = !painting;
+    	new SocketClient().execute();
+    	SocketClient.setMessage("Paint");
     }                                           
 
     private void j3RightButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -672,11 +683,13 @@ public class MainWindow extends javax.swing.JFrame {
 			if(status.equals("Server")) {
 				SocketServer.set_port(port);
 				drawServer();
+				SocketServer.mw=mw;
 				new SocketServer().execute();
 			} else if(status.equals("Client")) {
 				SocketClient.setIP(ip_address);
 				SocketClient.setPORT(port);
-				SocketClient.setMessage("this is a test blargh!!!");
+				SocketClient.mw = mw;
+				//SocketClient.setMessage("this is a test blargh!!!");
 				drawClient();
 				new SocketClient().execute();				
 			}				

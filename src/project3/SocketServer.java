@@ -78,12 +78,21 @@ public class SocketServer extends SwingWorker<Integer, Integer> {
 				while(true) {
 					//if(ready) {
 						ClientInput=socketInput.nextLine();
+						if(ClientInput.equals("Paint"))
+						{
+							mw.painting = !mw.painting;
+							System.out.println("BEEP");
+						}
+						//System.out.println("SERVER:" + ClientInput);
+						mw.drawBotbyString(ClientInput);
+						mw.repaint();
+						
 						if(ClientInput.equals("\\disconnect"))
 						{
 							out.println("\\disconnect");
 							break;
 						}
-						System.out.println(socket.getInetAddress()+":"+socket.getLocalPort()+": "+ClientInput);
+						//System.out.println(socket.getInetAddress()+":"+socket.getLocalPort()+": "+ClientInput);
 						//ready = false;
 					//}
 				}

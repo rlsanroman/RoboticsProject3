@@ -21,10 +21,10 @@ public class PaintBot {
 	public String toString()
 	{
 		String values = "";
-		values = joint1.toString() + "\n";
-		values += joint2.toString() + "\n";
-		values += joint3.toString() + "\n";
-		values += brush.toString() + "\n";
+		values = joint1.toString() + "-";
+		values += joint2.toString() + "-";
+		values += joint3.toString() + "-";
+		values += brush.toString() + "-";
 		return values;
 	}
 }

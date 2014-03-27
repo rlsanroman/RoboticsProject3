@@ -13,6 +13,7 @@ public class SocketClient extends SwingWorker<Integer, Integer> {
 	public static int PORT;
 	public static String ServerIP, message="";
 	private static Boolean messageSet=false; //
+	public static MainWindow mw;
 	
 	public static void setMessage(String m) {
 		SocketClient.message = m;
@@ -57,11 +58,19 @@ public class SocketClient extends SwingWorker<Integer, Integer> {
 			new ClientListenThread(socket).start();
 			while(true) {
 				if(!message.equals("disconnect") && messageSet) {
+					if(mw.delay)
+						Thread.sleep(2000);
 					out=new PrintWriter(socket.getOutputStream(), true);
 					//SocketServer.setReady(true);
-					out.println(message);					
+					out.println(message);
+					out.println(message);
+					//if(message.length() > 15)
+					//{
+
+					//}
 					messageSet = false;
 				}
+				socket.close();
 			}
 //			while(!storedClientInput.equals("\\disconnect"))
 //			{
