@@ -72,10 +72,16 @@ public class SocketServer extends SwingWorker<Integer, Integer> {
 				Scanner socketInput = new Scanner(socket.getInputStream());
 				while(true) {
 					ClientInput=socketInput.nextLine();
+					System.out.println(ClientInput);
 					if(ClientInput.equals("\\disconnect"))
 					{
 						out.println("\\disconnect");
 						break;
+					}
+					if(ClientInput.equals("received"))
+					{
+						//maybe add delay here
+						continue;
 					}
 					System.out.println(socket.getInetAddress()+":"+socket.getLocalPort()+": "+ClientInput);	
 				}

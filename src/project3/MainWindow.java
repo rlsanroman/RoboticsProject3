@@ -272,6 +272,8 @@ public class MainWindow extends javax.swing.JFrame {
 	  public void paint(Graphics g) {
 		 super.paintComponents(g);
 		 mw = this;
+		 if(status != null)
+			 SocketClient.setMessage(paintbot.toString());
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);
 	     drawSlider();
 	     drawPaint();
