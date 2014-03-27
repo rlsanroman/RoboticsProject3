@@ -235,18 +235,20 @@ public class MainWindow extends javax.swing.JFrame {
 	       g.drawString(total3, 100, 140);
 	  }
 	  
-	  public void drawServer(Graphics g){
+	  public void drawServer(){
+		  Graphics g = this.getGraphics();
 		  g.setColor(Color.GREEN);
 		  g.setFont(new Font("Arial", Font.BOLD, 20)); 
 	       String status = String.valueOf("Server");
-	       g.drawString(status, 500, 100);
+	       g.drawString(status, 500, 120);
 	  }
 	  
-	  public void drawClient(Graphics g){
+	  public void drawClient(){
+		  Graphics g = this.getGraphics();
 		  g.setColor(Color.GREEN);
 		  g.setFont(new Font("Arial", Font.BOLD, 20)); 
 	       String status = String.valueOf("Client");
-	       g.drawString(status, 500, 100);
+	       g.drawString(status, 500, 120);
 	  }
 	  
 	  @Override
@@ -256,7 +258,11 @@ public class MainWindow extends javax.swing.JFrame {
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);
 	     drawSlider();
 	     drawPaint();
-	     //drawClient(mainwindow);
+	     if(status != null)
+		     if(status.equals("Server"))
+		    	 drawServer();
+		     else if(status.equals("Client"))
+		    	 drawClient();
 	     //drawAngles();
 	     joint1YLabel.setText(String.valueOf(paintbot.joint1.y));
 	     joint1XLabel.setText(String.valueOf(paintbot.joint1.x));
@@ -279,6 +285,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
 		InitBot();
         initComponents();
+        status = null;
         this.setTitle("Paint-Bot v1.0");
     }
 
@@ -639,13 +646,15 @@ public class MainWindow extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			//System.out.println(port + " " + status);
-			if(status=="Server") {
-				System.out.println("Enter");
-				new SocketServer().start(port);
-				System.out.println("Done");
-			} else if(status=="Client") {
-				new SocketClient().start(port, ip_address);
+			if(status.equals("Server")) {
+				SocketServer.set_port(port);
+				drawServer();
+				new SocketServer().execute();
+			} else if(status.equals("Client")) {
+				SocketClient.setIP(ip_address);
+				SocketClient.setPORT(port);
+				drawClient();
+				new SocketClient().execute();
 			}				
 		}
 		

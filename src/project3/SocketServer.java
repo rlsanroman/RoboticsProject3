@@ -12,22 +12,19 @@ import javax.swing.SwingWorker;
 
 public class SocketServer extends SwingWorker<Integer, Integer> {
 	public static MainWindow mw;
+	public static int PORT;
+	
+	public static void set_port(int p) {
+		PORT = p;
+	}
 	
 	protected Integer doInBackground() throws Exception
     {
         // Do a time-consuming task.
+		startServer(PORT);
         Thread.sleep(1000);
         return 42;
     }
-	
-	public static void start(int port) {
-		try {
-			startServer(port);			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public static void startServer(int PORT) throws Exception {
 		//int PORT=0;
@@ -40,8 +37,6 @@ public class SocketServer extends SwingWorker<Integer, Integer> {
 		//input.nextLine();
 		//System.out.println("Please enter the max number of clients that can connect to the server.");
 		//BACKLOG=input.nextInt();
-		
-		
 		
 		ServerSocket listen = new ServerSocket(PORT, BACKLOG);
 		System.out.println("Server is now listening.");

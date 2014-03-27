@@ -10,23 +10,24 @@ import javax.swing.SwingWorker;
 
 public class SocketClient extends SwingWorker<Integer, Integer> {
 	private static PrintWriter out;
-	public static MainWindow mw;
+	public static int PORT;
+	public static String ServerIP;
+	
+	public static void setPORT(int p) {
+		PORT = p;
+	}
+	
+	public static void setIP(String ip) {
+		ServerIP = ip;
+	}
 	
 	protected Integer doInBackground() throws Exception
     {
         // Do a time-consuming task.
+		startClient(PORT, ServerIP);
         Thread.sleep(1000);
         return 42;
     }
-	
-	public static void start(int port, String ip_address) {
-		try {
-			startClient(port, ip_address);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public static void startClient(int PORT, String ServerIP) throws Exception {
 		//int PORT=0;
