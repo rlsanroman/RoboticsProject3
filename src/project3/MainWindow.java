@@ -61,6 +61,21 @@ public class MainWindow extends javax.swing.JFrame {
 	
 	String jointClicked = "";
 	Vector<Location> paintinglocations = new Vector<Location>();
+	
+	public void drawBotbyString(String points)
+	{
+		String[] lines = points.split("\n");
+		String[] line0 = lines[0].split(",");
+		String[] line1 = lines[1].split(",");
+		String[] line2 = lines[2].split(",");
+		String[] line3 = lines[3].split(",");
+		Location joint1 = new Location(line0);
+		Location joint2 = new Location(line1);
+		Location joint3 = new Location(line2);
+		Location brush = new Location(line3);
+		
+	    drawBot(joint1.x,joint2.x,joint2.y,joint3.x,joint3.y,brush.x,brush.y);
+	}
 	public void drawBot(double x1, double x2, double y2c, double x3, double y3c, double x4, double y4c) {
 		  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		  int height = screenSize.height;
@@ -298,6 +313,7 @@ public class MainWindow extends javax.swing.JFrame {
    		 	paintbot.joint2.x -= tempjointpos - paintbot.joint1.x ;
    		 	paintbot.joint3.x -= tempjointpos - paintbot.joint1.x;
    		 	paintbot.brush.x -= tempjointpos - paintbot.joint1.x;
+   		 	//HERE
             repaint();				
 		}
     }
