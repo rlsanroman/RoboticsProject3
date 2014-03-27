@@ -17,14 +17,4 @@ public class PaintBot {
 		theta = 4.88;
 		brushangle = 6.24;
 	}
-	
-	public String toString()
-	{
-		String values = "";
-		values = joint1.toString() + "\n";
-		values += joint2.toString() + "\n";
-		values += joint3.toString() + "\n";
-		values += brush.toString() + "\n";
-		return values;
-	}
 }
