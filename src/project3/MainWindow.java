@@ -59,6 +59,21 @@ public class MainWindow extends javax.swing.JFrame {
 	
 	public void set_status(String s) {
 		status = s;
+	}	
+	
+	public void drawBotbyString(String points)
+	{
+		String[] lines = points.split("\n");
+		String[] line0 = lines[0].split(",");
+		String[] line1 = lines[1].split(",");
+		String[] line2 = lines[2].split(",");
+		String[] line3 = lines[3].split(",");
+		Location joint1 = new Location(line0);
+		Location joint2 = new Location(line1);
+		Location joint3 = new Location(line2);
+		Location brush = new Location(line3);
+		
+	    drawBot(joint1.x,joint2.x,joint2.y,joint3.x,joint3.y,brush.x,brush.y);
 	}
 	
 	String jointClicked = "";
