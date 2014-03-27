@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -38,6 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
 	JLabel label;
 	PaintBot paintbot;
 	Boolean painting = false;
+	Boolean delay = false;
 	long timerInterval = 100; //milliseconds
 	Timer timer = new Timer();
 	boolean paused = false;
@@ -504,6 +506,10 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void delayCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delayCheckBoxActionPerformed
         // TODO add your handling code here:
+    	if(delayCheckBox.isSelected())
+    		delay = true;
+    	else
+    		delay = false;
     }//GEN-LAST:event_delayCheckBoxActionPerformed
 
     
@@ -548,8 +554,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu OptionsMenu;
     private javax.swing.JMenuItem ServerMenuItem;
     private javax.swing.JMenuItem ConnectMenuItem;
+    private javax.swing.JMenuItem DisconnectMenuItem;
     //Menubar actions
-    private Action serverAction, clientAction, connectAction;
+    private Action serverAction, clientAction, connectAction, disconnectAction;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel coordinatesPanel;
     //private javax.swing.JLabel j1Label;
@@ -614,7 +621,6 @@ public class MainWindow extends javax.swing.JFrame {
 		{
 			clientWindow = new ClientWindow(mw);
 			clientWindow.setVisible(true);
-			System.out.println("done");
 		}
 	}
     
@@ -653,9 +659,30 @@ public class MainWindow extends javax.swing.JFrame {
 			} else if(status.equals("Client")) {
 				SocketClient.setIP(ip_address);
 				SocketClient.setPORT(port);
+				SocketClient.setMessage("this is a test blargh!!!");
 				drawClient();
-				new SocketClient().execute();
+				new SocketClient().execute();				
 			}				
+		}
+		
+	}
+	
+    /**
+	 * Disconnect action.
+	 */
+	public class disconnectAction extends AbstractAction
+	{
+		public disconnectAction()
+		{
+			super();
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+			if(status != null) {
+				SocketClient.setMessage("disconnect");
+				status = null;
+			} else
+				System.out.println("You are not connected to anything!");
 		}
 		
 	}
@@ -666,12 +693,14 @@ public class MainWindow extends javax.swing.JFrame {
         clientAction = new clientAction();
         serverAction = new serverAction();
         connectAction = new connectAction();
+        disconnectAction = new disconnectAction();
         
         MenuBar = new javax.swing.JMenuBar();
         OptionsMenu = new javax.swing.JMenu();
         ServerMenuItem = new javax.swing.JMenuItem(serverAction);
         ClientMenuItem = new javax.swing.JMenuItem(clientAction);
         ConnectMenuItem = new javax.swing.JMenuItem(connectAction);
+        DisconnectMenuItem = new javax.swing.JMenuItem(disconnectAction);
 
         controlPanel = new javax.swing.JPanel();
         paintButton = new javax.swing.JToggleButton();
@@ -1100,9 +1129,11 @@ public class MainWindow extends javax.swing.JFrame {
         OptionsMenu.add(ServerMenuItem);
         
         ConnectMenuItem.setText("Connect");
+        DisconnectMenuItem.setText("Disconnect");
         
         MenuBar.add(OptionsMenu);
         MenuBar.add(ConnectMenuItem);
+        MenuBar.add(DisconnectMenuItem);
 
         setJMenuBar(MenuBar);
 
