@@ -13,7 +13,12 @@ import javax.swing.SwingWorker;
 public class SocketServer extends SwingWorker<Integer, Integer> {
 	public static MainWindow mw;
 	public static int PORT;
+	private static Boolean ready = false;
 	
+	public static void setReady(Boolean ready) {
+		SocketServer.ready = ready;
+	}
+
 	public static void set_port(int p) {
 		PORT = p;
 	}
@@ -71,13 +76,16 @@ public class SocketServer extends SwingWorker<Integer, Integer> {
 				new ServerSendThread(socket).start();
 				Scanner socketInput = new Scanner(socket.getInputStream());
 				while(true) {
-					ClientInput=socketInput.nextLine();
-					if(ClientInput.equals("\\disconnect"))
-					{
-						out.println("\\disconnect");
-						break;
-					}
-					System.out.println(socket.getInetAddress()+":"+socket.getLocalPort()+": "+ClientInput);	
+					//if(ready) {
+						ClientInput=socketInput.nextLine();
+						if(ClientInput.equals("\\disconnect"))
+						{
+							out.println("\\disconnect");
+							break;
+						}
+						System.out.println(socket.getInetAddress()+":"+socket.getLocalPort()+": "+ClientInput);
+						//ready = false;
+					//}
 				}
 				System.out.println("Client"+ClientNumber+"("+socket.getInetAddress()+") is diconnected.");
 				socketInput.close();

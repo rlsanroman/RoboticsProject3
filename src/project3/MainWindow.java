@@ -255,6 +255,8 @@ public class MainWindow extends javax.swing.JFrame {
 	  
 	  @Override
 	  public void paint(Graphics g) {
+		 if(status != null)
+			SocketClient.setMessage("this is a test TWOOOOO!!!");
 		 super.paintComponents(g);
 		 mw = this;
 	     drawBot(paintbot.joint1.x,paintbot.joint2.x,paintbot.joint2.y,paintbot.joint3.x,paintbot.joint3.y,paintbot.brush.x,paintbot.brush.y);

@@ -11,8 +11,8 @@ import javax.swing.SwingWorker;
 public class SocketClient extends SwingWorker<Integer, Integer> {
 	private static PrintWriter out;
 	public static int PORT;
-	public static String ServerIP, message;
-	private static Boolean messageSet; //
+	public static String ServerIP, message="";
+	private static Boolean messageSet=false; //
 	
 	public static void setMessage(String m) {
 		SocketClient.message = m;
@@ -55,10 +55,13 @@ public class SocketClient extends SwingWorker<Integer, Integer> {
 			//Scanner socketInput = new Scanner(socket.getInputStream());
 			//System.out.println(socketInput.nextLine())
 			new ClientListenThread(socket).start();
-			while(!message.equals("disconnect") && messageSet) {
-				out=new PrintWriter(socket.getOutputStream(), true);
-				out.println(message);
-				messageSet = false;
+			while(true) {
+				if(!message.equals("disconnect") && messageSet) {
+					out=new PrintWriter(socket.getOutputStream(), true);
+					//SocketServer.setReady(true);
+					out.println(message);					
+					messageSet = false;
+				}
 			}
 //			while(!storedClientInput.equals("\\disconnect"))
 //			{
@@ -69,9 +72,9 @@ public class SocketClient extends SwingWorker<Integer, Integer> {
 //				out.print("This is a test");
 //				out.println(storedClientInput);
 //			}
-			while(!socket.isClosed())
-			{				
-			}
+//			while(!socket.isClosed())
+//			{				
+//			}
 			//socketInput.close();
 		} finally {
 			socket.close();
